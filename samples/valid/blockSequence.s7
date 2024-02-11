@@ -1,0 +1,8 @@
+8:562(12)
+    0 Short s000_counter-parts-good-shift_001
+    2 Short s000_counter-parts-good-shift_002
+    4 Int   s000_counter-parts-rework-total
+    8 Int   s000_counter-parts-setup-total
+
+8:128(2)
+    0 Short s000_counter-parts-good-shift_001

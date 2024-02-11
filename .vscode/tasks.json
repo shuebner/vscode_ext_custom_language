@@ -1,0 +1,50 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "restore",
+			"label": "restore",
+			"group": "build",
+			"path": "vscode",
+			"presentation": {
+				"panel": "dedicated",
+				"reveal": "never"
+			}
+		},
+		{
+			"type": "npm",
+			"script": "compile",
+			"label": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"path": "vscode",
+			"presentation": {
+				"panel": "dedicated",
+				"reveal": "never"
+			},
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"type": "npm",
+			"script": "watch",
+			"label": "watch",
+			"isBackground": true,
+			"group": {
+				"kind": "build"
+			},
+			"path": "vscode",
+			"presentation": {
+				"panel": "dedicated",
+				"reveal": "never"
+			},
+			"problemMatcher": [
+				"$tsc-watch"
+			]
+		}
+	]
+}
