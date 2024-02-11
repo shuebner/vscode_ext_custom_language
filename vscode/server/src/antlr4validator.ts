@@ -1,22 +1,29 @@
-import { CharStream, CommonTokenStream, ErrorListener, RecognitionException, Recognizer, Token }  from 'antlr4';
+import { CharStream, CommonTokenStream, ErrorListener, Lexer, Parser, ParserRuleContext, RecognitionException, Recognizer, Token, TokenStream }  from 'antlr4';
 import {
 	Diagnostic,
 } from 'vscode-languageserver/node';
-import MyGrammarLexer from './S7BlockSequence/S7BlockSequenceLexer';
-import MyGrammarParser from './S7BlockSequence/S7BlockSequenceParser';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 
-export function Validate(document: TextDocument): Diagnostic[] {
-	const text = document.getText();
-	const chars = new CharStream(text); // replace this with a FileStream as required
-	const lexer = new MyGrammarLexer(chars);
-	const tokens = new CommonTokenStream(lexer);
-	const parser = new MyGrammarParser(tokens);
-	const diagnosticsListener = new DiagnosticsListener();
-	parser.addErrorListener(diagnosticsListener);
-	const tree = parser.expr();
+export class AntlrValidator<TParser extends Parser> {
+	public constructor(
+		private lexerFactory: (cs: CharStream) => Lexer,
+		private parserFactory: (ts: TokenStream) => TParser,
+		private parseTree: (parser: TParser) => ParserRuleContext) {		
+	}
 
-	return diagnosticsListener.diagnostics;
+	public Validate(document: TextDocument): Diagnostic[] {
+		const text = document.getText();
+		const chars = new CharStream(text); // replace this with a FileStream as required
+		const lexer = this.lexerFactory(chars);
+		const tokens = new CommonTokenStream(lexer);
+		const parser = this.parserFactory(tokens);
+		const diagnosticsListener = new DiagnosticsListener();
+		parser.addErrorListener(diagnosticsListener);
+
+		const tree = this.parseTree(parser);
+	
+		return diagnosticsListener.diagnostics;
+	}
 }
 
 class DiagnosticsListener extends ErrorListener<Token> {

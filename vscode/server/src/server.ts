@@ -16,8 +16,10 @@ import {
 } from 'vscode-languageserver-textdocument';
 
 import {
-	Validate
+	AntlrValidator
 } from './antlr4validator';
+import S7BlockSequenceLexer from './S7BlockSequence/S7BlockSequenceLexer';
+import S7BlockSequenceParser from './S7BlockSequence/S7BlockSequenceParser';
 
 // Create a connection for the server, using Node's IPC as a transport.
 // Also include all preview / proposed LSP features.
@@ -25,6 +27,11 @@ const connection = createConnection(ProposedFeatures.all);
 
 // Create a simple text document manager.
 const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
+
+const validator = new AntlrValidator(
+	cs => new S7BlockSequenceLexer(cs),
+	ts => new S7BlockSequenceParser(ts),
+	parser => parser.expr());
 
 connection.onInitialize(() => {
 	const result: InitializeResult = {
@@ -38,7 +45,7 @@ connection.onInitialize(() => {
 // The content of a text document has changed. This event is emitted
 // when the text document first opened or when its content has changed.
 documents.onDidChangeContent(change => {
-	const diagnostics: Diagnostic[] = Validate(change.document);
+	const diagnostics: Diagnostic[] = validator.Validate(change.document);
 	// Send the computed diagnostics to VSCode.
 	connection.sendDiagnostics({ uri: change.document.uri, diagnostics });
 });
