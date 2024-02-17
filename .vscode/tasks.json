@@ -45,6 +45,12 @@
 			"problemMatcher": [
 				"$tsc-watch"
 			]
+		},
+		{
+			"type": "shell",
+			"label": "generate parser",
+			"command": "antlr4 grammar/S7BlockSequence.g4 -Dlanguage=TypeScript -visitor -o vscode/server/src/S7BlockSequence/",
+			"group": "build"
 		}
 	]
 }
