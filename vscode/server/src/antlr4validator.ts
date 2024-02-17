@@ -36,7 +36,7 @@ class DiagnosticsListener extends ErrorListener<Token> {
 				start: { line: line - 1, character: column },
 				end: { line: line - 1, character: column + offendingSymbol.stop - offendingSymbol.start + 1 }
 			},
-			source: 'antlr'
+			source: 's7db'
 		};
 		this.diagnostics.push(diagnostic);
 	}
