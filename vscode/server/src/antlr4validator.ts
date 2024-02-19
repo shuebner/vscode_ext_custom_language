@@ -5,7 +5,6 @@ import {
 import MyGrammarLexer from './S7BlockSequence/S7BlockSequenceLexer';
 import MyGrammarParser from './S7BlockSequence/S7BlockSequenceParser';
 import { TextDocument } from 'vscode-languageserver-textdocument';
-import { off } from 'process';
 
 export function Validate(document: TextDocument): Diagnostic[] {
 	const text = document.getText();
@@ -23,7 +22,7 @@ export function Validate(document: TextDocument): Diagnostic[] {
 class DiagnosticsListener extends ErrorListener<Token> {
 	public diagnostics: Diagnostic[] = [];
 
-	syntaxError(recognizer: Recognizer<Token>, offendingSymbol: Token, line: number, column: number, msg: string, e: RecognitionException | undefined): void {
+	syntaxError(_recognizer: Recognizer<Token>, offendingSymbol: Token, line: number, column: number, msg: string, e: RecognitionException | undefined): void {
 		const diagnostic = {
 			message: msg,
 			range: {
