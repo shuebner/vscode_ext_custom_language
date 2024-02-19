@@ -12,8 +12,6 @@ import {
 	Interval, IntervalSet
 } from 'antlr4';
 import S7BlockSequenceListener from "./S7BlockSequenceListener.js";
-import S7BlockSequenceVisitor from "./S7BlockSequenceVisitor.js";
-
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
 // eslint-disable-next-line no-unused-vars
 type int = number;
@@ -562,14 +560,6 @@ export class ExprContext extends ParserRuleContext {
 	 		listener.exitExpr(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitExpr) {
-			return visitor.visitExpr(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -603,14 +593,6 @@ export class BlockSequenceContext extends ParserRuleContext {
 	 		listener.exitBlockSequence(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitBlockSequence) {
-			return visitor.visitBlockSequence(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -639,14 +621,6 @@ export class BlockContext extends ParserRuleContext {
 	public exitRule(listener: S7BlockSequenceListener): void {
 	    if(listener.exitBlock) {
 	 		listener.exitBlock(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitBlock) {
-			return visitor.visitBlock(this);
-		} else {
-			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -682,14 +656,6 @@ export class VariableDefinitionsContext extends ParserRuleContext {
 	 		listener.exitVariableDefinitions(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitVariableDefinitions) {
-			return visitor.visitVariableDefinitions(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -721,14 +687,6 @@ export class BlockHeaderContext extends ParserRuleContext {
 	public exitRule(listener: S7BlockSequenceListener): void {
 	    if(listener.exitBlockHeader) {
 	 		listener.exitBlockHeader(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitBlockHeader) {
-			return visitor.visitBlockHeader(this);
-		} else {
-			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -767,14 +725,6 @@ export class VariableDefinitionContext extends ParserRuleContext {
 	 		listener.exitVariableDefinition(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitVariableDefinition) {
-			return visitor.visitVariableDefinition(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -797,14 +747,6 @@ export class DbNumberContext extends ParserRuleContext {
 	public exitRule(listener: S7BlockSequenceListener): void {
 	    if(listener.exitDbNumber) {
 	 		listener.exitDbNumber(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitDbNumber) {
-			return visitor.visitDbNumber(this);
-		} else {
-			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -831,14 +773,6 @@ export class DbOffsetContext extends ParserRuleContext {
 	 		listener.exitDbOffset(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitDbOffset) {
-			return visitor.visitDbOffset(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -863,14 +797,6 @@ export class ByteAmountContext extends ParserRuleContext {
 	 		listener.exitByteAmount(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitByteAmount) {
-			return visitor.visitByteAmount(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -893,14 +819,6 @@ export class ByteOffsetContext extends ParserRuleContext {
 	public exitRule(listener: S7BlockSequenceListener): void {
 	    if(listener.exitByteOffset) {
 	 		listener.exitByteOffset(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitByteOffset) {
-			return visitor.visitByteOffset(this);
-		} else {
-			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -930,14 +848,6 @@ export class TypeContext extends ParserRuleContext {
 	 		listener.exitType(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitType) {
-			return visitor.visitType(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -960,14 +870,6 @@ export class VarNameContext extends ParserRuleContext {
 	public exitRule(listener: S7BlockSequenceListener): void {
 	    if(listener.exitVarName) {
 	 		listener.exitVarName(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitVarName) {
-			return visitor.visitVarName(this);
-		} else {
-			return visitor.visitChildren(this);
 		}
 	}
 }
@@ -994,14 +896,6 @@ export class ShortContext extends ParserRuleContext {
 	 		listener.exitShort(this);
 		}
 	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitShort) {
-			return visitor.visitShort(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
 }
 
 
@@ -1024,14 +918,6 @@ export class IntContext extends ParserRuleContext {
 	public exitRule(listener: S7BlockSequenceListener): void {
 	    if(listener.exitInt) {
 	 		listener.exitInt(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: S7BlockSequenceVisitor<Result>): Result {
-		if (visitor.visitInt) {
-			return visitor.visitInt(this);
-		} else {
-			return visitor.visitChildren(this);
 		}
 	}
 }
