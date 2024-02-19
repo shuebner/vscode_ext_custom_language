@@ -21,6 +21,19 @@
 	],
 	"main": "./client/out/extension",
 	"contributes": {
+		"languages": [
+		  {
+			"id": "S7DB",
+			"extensions": [".s7db"]
+		  }
+		],
+		"grammars": [
+		  {
+			"language": "S7DB",
+			"scopeName": "source.s7db",
+			"path": "./syntaxes/s7db.tmGrammar.json"
+		  }
+		],
 		"configuration": {
 			"type": "object",
 			"title": "Example configuration",
